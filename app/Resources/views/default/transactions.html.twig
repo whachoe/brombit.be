@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1>Wallet history <span class="badge"> {{ pagination.getTotalItemCount }}</span></h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'Date', 't.date') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'From', 't.fromCurrency') }}</th>
+                <th></th>
+                <th>{{ knp_pagination_sortable(pagination, 'To', 't.toCurrency') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for balance in pagination %}
+                <tr>
+                    <td>{{ balance.date|date('d/m/Y H:i') }}</td>
+                    <td>{{ balance.fromCurrency|upper }} <b>{{ balance.fromAmount }}</b></td>
+                    <td><span class="glyphicon glyphicon-arrow-right"></span></td>
+                    <td>{{ balance.toCurrency|upper }} <b>{{ balance.toAmount }}</b></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>

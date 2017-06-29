@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-10">
+        <h1>Participants <span class="badge"> {{ pagination.getTotalItemCount }}</span></h1>
+        <table class="table table-striped">
+            <thead>
+            <th>{{ knp_pagination_sortable(pagination, 'Date', 'u.date') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Name', 'u.username') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Percentage', 'u.percentage') }}</th>
+            </thead>
+            <tbody>
+            {% for user in pagination %}
+                <tr>
+                    <td>{{ user.createdAt | date('d/m/Y') }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.percentage | number_format(2) }}%</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+</div>
+
+<div class="clearfix"></div>
