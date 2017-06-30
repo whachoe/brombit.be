@@ -19,7 +19,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT b FROM AppBundle:Balance b ORDER BY b.date DESC";
+        $dql   = "SELECT b FROM AppBundle:Balance b ORDER BY b.balanceDate DESC";
         $query = $em->createQuery($dql);
         $lastBalance = $query->setMaxResults(1)->getResult()[0];
 
@@ -76,7 +76,7 @@ class DefaultController extends Controller
     public function transactionListAction(Request $request)
     {
         $em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT t FROM AppBundle:TransactionHistory t ORDER BY t.date";
+        $dql   = "SELECT t FROM AppBundle:TransactionHistory t ORDER BY t.transactionDate";
         $query = $em->createQuery($dql);
 
         $paginator  = $this->get('knp_paginator');
