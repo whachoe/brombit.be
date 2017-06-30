@@ -7,17 +7,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="transaction_history")
- * @UniqueEntity("date")
- *
  */
 class TransactionHistory
 {
     /**
+     * @var \DateTime
      * @ORM\Id
-     * @ORM\Column(type="datetime", unique=true)
+     * @ORM\Column(type="mydatetime", unique=true)
      *
      */
-    protected $date;
+    protected $transactionDate;
 
     /**
      * @ORM\Column(type="string")
@@ -44,18 +43,37 @@ class TransactionHistory
      */
     public function getDate()
     {
-        return $this->date;
+        return $this->transactionDate;
     }
 
     /**
      * @param mixed $date
      * @return TransactionHistory
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date)
     {
-        $this->date = $date;
+        $this->transactionDate = $date;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTransactionDate()
+    {
+        return $this->transactionDate;
+    }
+
+    /**
+     * @param mixed $transactionDate
+     * @return TransactionHistory
+     */
+    public function setTransactionDate(\DateTime $transactionDate)
+    {
+        $this->transactionDate = $transactionDate;
+        return $this;
+    }
+
 
     /**
      * @return mixed
@@ -129,4 +147,8 @@ class TransactionHistory
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getDate() instanceof \DateTime ? $this->getDate()->format("c") : 'new Transaction';
+    }
 }

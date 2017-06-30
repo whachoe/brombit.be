@@ -11,10 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 class Balance
 {
     /**
+     * @var \DateTime
      * @ORM\Id
-     * @ORM\Column(type="datetime", unique=true)
+     * @ORM\Column(type="mydatetime", unique=true)
      */
-    protected $date;
+    protected $balanceDate;
 
     /**
      * @ORM\Column(type="string")
@@ -46,18 +47,37 @@ class Balance
      */
     public function getDate()
     {
-        return $this->date;
+        return $this->balanceDate;
     }
 
     /**
      * @param mixed $date
      * @return Balance
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date)
     {
-        $this->date = $date;
+        $this->balanceDate = $date;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getBalanceDate()
+    {
+        return $this->balanceDate;
+    }
+
+    /**
+     * @param mixed $balanceDate
+     * @return Balance
+     */
+    public function setBalanceDate(\DateTime $balanceDate)
+    {
+        $this->balanceDate = $balanceDate;
+        return $this;
+    }
+
 
     /**
      * @return mixed
@@ -147,5 +167,10 @@ class Balance
     {
         $this->totalEuro = $totalEuro;
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getDate() ? $this->getDate()->format("c") : 'new Balance';
     }
 }

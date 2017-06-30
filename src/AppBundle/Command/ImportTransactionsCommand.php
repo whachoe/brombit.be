@@ -9,14 +9,13 @@
 namespace AppBundle\Command;
 
 
-use AppBundle\Entity\Balance;
 use AppBundle\Entity\TransactionHistory;
+use AppBundle\Type\MyDateTime;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\VarDumper\VarDumper;
 
 class ImportTransactionsCommand extends ContainerAwareCommand
 {
@@ -53,27 +52,36 @@ class ImportTransactionsCommand extends ContainerAwareCommand
             $this->getContainer()->get('doctrine.orm.default_entity_manager')->flush();
 
             $now = new \DateTime();
-            $output->writeln($now->format('Y-m-d H:i:s') . "- Imported balances: $csvfile");
+            $output->writeln($now->format('c') . "- Imported balances: $csvfile");
         } else {
             $now = new \DateTime();
-            $output->writeln($now->format('Y-m-d H:i:s') ." - Failed to import from $csvfile");
+            $output->writeln($now->format('c') . " - Failed to import from $csvfile");
         }
     }
 
     private function makeTransaction($yo)
     {
-        $balance = new TransactionHistory();
-        $balance->setDate(new \DateTime($yo[0]));
-        $balance->setFromCurrency($yo[1]);
-        $balance->setFromAmount($yo[2]);
-        $balance->setToCurrency($yo[3]);
-        $balance->setToAmount($yo[4]);
+        $date = new MyDateTime($yo[0]);
+        if ($date instanceof MyDateTime) {
+            $transaction = new TransactionHistory();
+            $transaction->setDate($date)
+                ->setFromCurrency($yo[1])
+                ->setFromAmount($yo[2])
+                ->setToCurrency($yo[3])
+                ->setToAmount($yo[4]);
 
-        $existing = $this->getContainer()->get('doctrine.orm.default_entity_manager')->getRepository(TransactionHistory::class)
-            ->findBy(['date' => $balance->getDate()]);
+            $query = $this->getContainer()->get('doctrine.orm.default_entity_manager')
+                ->createQueryBuilder()
+                ->select('t')->from('AppBundle:TransactionHistory', 't')
+                ->where('t.transactionDate = :date')
+                ->setParameter('date', $date)
+                ->getQuery();
 
-        if (count($existing) == 0) {
-            $this->getContainer()->get('doctrine.orm.default_entity_manager')->persist($balance);
+            $existing = $query->getResult();
+
+            if (count($existing) == 0) {
+                $this->getContainer()->get('doctrine.orm.default_entity_manager')->persist($transaction);
+            }
         }
     }
 }

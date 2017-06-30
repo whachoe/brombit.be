@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170629182920 extends AbstractMigration
+class Version20170630202222 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -19,10 +19,10 @@ class Version20170629182920 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SEQUENCE fos_user_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE balance (date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, btc VARCHAR(255) NOT NULL, eth VARCHAR(255) NOT NULL, ltc VARCHAR(255) NOT NULL, zec VARCHAR(255) NOT NULL, total_euro VARCHAR(255) NOT NULL, PRIMARY KEY(date))');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_ACF41FFEAA9E377A ON balance (date)');
-        $this->addSql('CREATE TABLE transaction_history (date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, from_currency VARCHAR(255) NOT NULL, to_currency VARCHAR(255) NOT NULL, from_amount VARCHAR(255) NOT NULL, to_amount VARCHAR(255) NOT NULL, PRIMARY KEY(date))');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_51104CA9AA9E377A ON transaction_history (date)');
+        $this->addSql('CREATE TABLE balance (balance_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, btc VARCHAR(255) NOT NULL, eth VARCHAR(255) NOT NULL, ltc VARCHAR(255) NOT NULL, zec VARCHAR(255) NOT NULL, total_euro VARCHAR(255) NOT NULL, PRIMARY KEY(balance_date))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_ACF41FFEB8BAC67D ON balance (balance_date)');
+        $this->addSql('CREATE TABLE transaction_history (transaction_date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, from_currency VARCHAR(255) NOT NULL, to_currency VARCHAR(255) NOT NULL, from_amount VARCHAR(255) NOT NULL, to_amount VARCHAR(255) NOT NULL, PRIMARY KEY(transaction_date))');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_51104CA948DD09DB ON transaction_history (transaction_date)');
         $this->addSql('CREATE TABLE fos_user (id INT NOT NULL, created_by_id INT DEFAULT NULL, updated_by_id INT DEFAULT NULL, username VARCHAR(180) NOT NULL, username_canonical VARCHAR(180) NOT NULL, email VARCHAR(180) NOT NULL, email_canonical VARCHAR(180) NOT NULL, enabled BOOLEAN NOT NULL, salt VARCHAR(255) DEFAULT NULL, password VARCHAR(255) NOT NULL, last_login TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, confirmation_token VARCHAR(180) DEFAULT NULL, password_requested_at TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, roles TEXT NOT NULL, eth_address TEXT NOT NULL, initial_funds INT NOT NULL, percentage DOUBLE PRECISION NOT NULL, created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, updated_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_957A647992FC23A8 ON fos_user (username_canonical)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_957A6479A0D96FBF ON fos_user (email_canonical)');

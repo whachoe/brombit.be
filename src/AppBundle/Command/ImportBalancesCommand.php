@@ -10,6 +10,7 @@ namespace AppBundle\Command;
 
 
 use AppBundle\Entity\Balance;
+use AppBundle\Type\MyDateTime;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -59,14 +60,28 @@ class ImportBalancesCommand extends ContainerAwareCommand
 
     private function makeBalance($yo)
     {
-        $balance = new Balance();
-        $balance->setDate(new \DateTime($yo[0]));
-        $balance->setBtc($yo[1]);
-        $balance->setEth($yo[2]);
-        $balance->setZec($yo[3]);
-        $balance->setLtc($yo[4]);
-        $balance->setTotalEuro($yo[5]);
+        $date = new MyDateTime($yo[0]);
+        if ($date instanceof MyDateTime) {
+            $balance = new Balance();
+            $balance->setDate($date);
+            $balance->setBtc($yo[1]);
+            $balance->setEth($yo[2]);
+            $balance->setZec($yo[3]);
+            $balance->setLtc($yo[4]);
+            $balance->setTotalEuro($yo[5]);
 
-        $this->getContainer()->get('doctrine.orm.default_entity_manager')->persist($balance);
+            $query = $this->getContainer()->get('doctrine.orm.default_entity_manager')
+                ->createQueryBuilder()
+                ->select('b')->from('AppBundle:Balance', 'b')
+                ->where('b.balanceDate = :date')
+                ->setParameter('date', $date)
+                ->getQuery();
+
+            $existing = $query->getResult();
+
+            if (count($existing) == 0) {
+                $this->getContainer()->get('doctrine.orm.default_entity_manager')->persist($balance);
+            }
+        }
     }
 }
