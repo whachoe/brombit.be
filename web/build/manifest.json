@@ -5,6 +5,5 @@
   "build/fonts/glyphicons-halflings-regular.woff": "/build/fonts/glyphicons-halflings-regular.woff",
   "build/fonts/glyphicons-halflings-regular.woff2": "/build/fonts/glyphicons-halflings-regular.woff2",
   "build/global.css": "/build/global.css",
-  "build/images/glyphicons-halflings-regular.svg": "/build/images/glyphicons-halflings-regular.svg",
-  "build/knp_paginator_ajax.js": "/build/knp_paginator_ajax.js"
+  "build/images/glyphicons-halflings-regular.svg": "/build/images/glyphicons-halflings-regular.svg"
 }
