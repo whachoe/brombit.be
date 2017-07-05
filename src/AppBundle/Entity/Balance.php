@@ -40,6 +40,11 @@ class Balance
     /**
      * @ORM\Column(type="string")
      */
+    protected $xmr;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $totalEuro;
 
     /**
@@ -150,6 +155,25 @@ class Balance
         $this->zec = $zec;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getXmr()
+    {
+        return $this->xmr;
+    }
+
+    /**
+     * @param mixed $xmr
+     * @return Balance
+     */
+    public function setXmr($xmr)
+    {
+        $this->xmr = $xmr;
+        return $this;
+    }
+
 
     /**
      * @return mixed

@@ -66,9 +66,10 @@ class ImportBalancesCommand extends ContainerAwareCommand
             $balance->setDate($date);
             $balance->setBtc($yo[1]);
             $balance->setEth($yo[2]);
-            $balance->setZec($yo[3]);
-            $balance->setLtc($yo[4]);
-            $balance->setTotalEuro($yo[5]);
+            $balance->setXmr($yo[3]);
+            $balance->setZec($yo[4]);
+            $balance->setLtc($yo[5]);
+            $balance->setTotalEuro($yo[6]);
 
             $query = $this->getContainer()->get('doctrine.orm.default_entity_manager')
                 ->createQueryBuilder()

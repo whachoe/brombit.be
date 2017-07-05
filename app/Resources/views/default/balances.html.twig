@@ -7,6 +7,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'Date', 'b.date') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'BTC', 'b.btc') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'ETH', 'b.eth') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'XMR', 'b.xmr') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'ZEC', 'b.zec') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'LTC', 'b.ltc') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Total €', 'b.totalEuro') }}</th>
@@ -18,6 +19,7 @@
                     <td>{{ balance.date|date('d/m/Y H:i') }}</td>
                     <td>{{ balance.btc }}</td>
                     <td>{{ balance.eth }}</td>
+                    <td>{{ balance.xmr }}</td>
                     <td>{{ balance.zec }}</td>
                     <td>{{ balance.ltc }}</td>
                     <td>{{ balance.totalEuro }}</td>
