@@ -89,4 +89,22 @@ class DefaultController extends Controller
 
         return $this->render('default/transactions.html.twig', ['pagination' => $pagination]);
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/terms", name="terms")
+     */
+    public function termsAndConditionsAction()
+    {
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT b FROM AppBundle:Balance b ORDER BY b.balanceDate DESC";
+        $query = $em->createQuery($dql);
+        $lastBalance = $query->setMaxResults(1)->getResult()[0];
+
+        return $this->render('default/termsandconditions.html.twig', [
+            'lastBalance' => $lastBalance,
+            'participants' => $this->getDoctrine()->getRepository(User::class)->findParticipants(),
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
 }

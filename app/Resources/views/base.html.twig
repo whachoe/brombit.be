@@ -1,19 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Rombit Crypto Funds{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('build/global.css') }}">
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Rombit Crypto Funds{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/global.css') }}">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    </head>
-    <body>
+</head>
+<body>
+<div id="wrapper">
+    <div id="container">
+        {% block topbar %}
+        {% if app.user %}
+        <div id="topbar" class="row">
+            <div class="col-md-2">
+                ROMBIT CRYPTO FUNDS
+            </div>
+            <div class="col-md-2">
+                <div class="topbar-title">Total</div>
+                <div class="topbar-value">{{ lastBalance.totalEuro | number_format(2) }} &euro;</div>
+            </div>
+            <div class="col-md-2">
+                <div class="topbar-title">Your percentage</div>
+                <div class="topbar-value">{{ app.user.percentage | number_format(2) }} &percnt;</div>
+            </div>
+            <div class="col-md-2">
+                {% set yourShare = lastBalance.totalEuro * app.user.percentage/100 %}
+                <div class="topbar-title">Your share</div>
+                <div class="topbar-value {{ yourShare < app.user.initialFunds ? 'text-danger' : 'text-success' }}">{{ yourShare | number_format(2) }}
+                    &euro;
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="topbar-title">Your initial investment</div>
+                <div class="topbar-value">{{ app.user.initialFunds }} &euro;</div>
+            </div>
+            <div class="col-md-2">
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Whachoe <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="/">Dashboard</a></li>
+                            <li><a href="/terms">Terms&Conditions</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="/logout">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endblock topbar %}
         {% block body %}{% endblock %}
-        {% block javascripts %}
-            <script src="{{ asset('build/app.js') }}"></script>
-        {% endblock %}
-    </body>
+    </div>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('build/app.js') }}"></script>
+{% endblock %}
+</body>
 </html>

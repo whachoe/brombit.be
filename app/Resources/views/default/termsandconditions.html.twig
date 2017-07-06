@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="well well-lg">
+        <h1>What?</h1>
+
+        <p>This is an experiment in Crypto-currency fundbuilding. Like a normal stock-fund, we have a 'portefeuille' of
+            various assets in which we spread our investment risk.</p>
+        <p>Instead of stocks, we invest in a few cryptocurrencies. Namely: </p>
+        <ul>
+            <li><a href="http://bitcoin.org" target="_blank">Bitcoin (BTC)</a></li>
+            <li><a href="https://ethereum.org/" target="_blank">Ethereum (ETH)</a></li>
+            <li><a href="https://getmonero.org/" target="_blank">Monero (XMR)</a></li>
+            <li><a href="https://z.cash/" target="_blank">ZCash (ZEC)</a></li>
+            <li><a href="https://litecoin.org/" target="_blank">Litecoin (LTC)</a></li>
+        </ul>
+        <p>
+            The goal of our experiment is to leverage the rates of the various currencies against eachother to exchange
+            one HIGH currency for another one that is currently LOW.
+        </p>
+        <p>
+            Part of this process is completely automated. We follow the <a href="https://twitter.com/vickicryptobot"
+                                                                           target="_blank">Vicki Crypto Bot</a> feed and
+            automatically match her 'long' and 'short' positions.
+        </p>
+        <p>
+            When a really good opportunity presents itself, the owner might manually do a switch if it was not predicted
+            by Vicki.
+        </p>
+        <p>
+            Every time we do a swap between 2 currencies, we'll invest 80% of our current input-currency. In some cases we might not be able to exchange 80% because Shapeshift (our exchange) might have lower limits.
+        </p>
+
+        <h1>Can i join?</h1>
+        <p>Ofcourse you can!</p>
+        <p>To join, send some funds to one of our public addresses (listed below) and send an email to <a href="mailto:jo.giraerts@rombit.be">Jo Giraerts</a> with a link to the transaction on the blockchain.</p>
+        <p>Once the funds are received, you'll get an account with your initial funds set against the going rate against EURO.</p>
+        <p>If you don't have any crypto-currency, we'll accept cash and invest from our personal ETH-stack.</p>
+        <h1>Can i leave?</h1>
+        <p>You can step out at any time by mailing Jo again. Be sure to state in which crypto-currency you wish to be paid and leave a correct public address. Your percentage of the stake will drop to 0, but your user-account will still be open so you can still follow the exploits of our fund. </p>
+
+        <h1>Is this safe?</h1>
+        <p>No, it is not. As with all stock-funds, you might lose your money. But we do our utter best to safeguard your investment.</p>
+        <p>The server which handles the funds does not run anything other than the wallet-software of the various currencies and is not accessible even if the webserver where this site is hosted, is compromised.</p>
+        <p>Backups of the database are sent to my home-NAS through a one-way ssh-tunnel</p>
+
+        <h1>Our public addresses</h1>
+        Funds can be sent to one of the following addresses:
+        <ul>
+            <li><b>BTC:</b> 1GKRZAxHS8464oTqhyZY6PB5ATePimpqsJ</li>
+            <li><b>ETH:</b> 0xbf231d44f2039624705906805155698b7ee7307c</li>
+            <li><b>XMR:</b> 43BKr1WNjMzY9XHhVufe1d59FMiHDVTgZ5SKnHp4MNKcDntuvJrhRkA1nPHvedTNCqSiMDRjxETw7CLEmS21RiHiNtW5aEH</li>
+            <li><b>ZEC:</b> zcBnJr9EcjDDMjzysgimZy64XLVKhGPZYPWNhU2QBgnAmBKB2aq274ZL7QAnVhdGdG1vzWRWEhHGEEVFpBskgioBFk6jJXW</li>
+            <li><b>LTC:</b> LLRt74uu1NWhjNfutYvdadwac4CHt8yyXd</li>
+        </ul>
+    </div>
+{% endblock body %}
