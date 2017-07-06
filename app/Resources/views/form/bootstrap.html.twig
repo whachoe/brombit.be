@@ -1,0 +1,30 @@
+{% extends 'bootstrap_3_layout.html.twig' %}
+
+{% block form_label -%}
+    {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' control-label '~ (required ? 'required': ''))|trim}) -%}
+    {% if label_icon is defined %}
+        <i class="{{ label_icon }}"></i>
+    {% endif %}
+    {{- parent() -}}
+    {% if required %}
+        <span class="required" title="{{ 'required_field'|trans }}">*</span>
+    {% endif %}
+    {%  if attr and attr.help ?? '' %}
+        <a href="#" data-toggle="tooltip" title="{{ attr.help }}">?</a>
+
+        {#<span class="help-block">{{ help }}</span>#}
+    {% endif %}
+{%- endblock form_label %}
+
+{% block date_widget %}
+    {% if widget == 'single_text' %}
+    <div class="input-group date datePickerContainer">
+        {{ parent() }}
+        <span class="input-group-addon datePickerIcon">
+            <span class="fa fa-calendar"></span>
+        </span>
+    </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
