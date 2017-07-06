@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-md-12">
-        <h1>Wallet history <span class="badge"> {{ pagination.getTotalItemCount }}</span></h1>
+        <h1>Transactions <span class="badge"> {{ pagination.getTotalItemCount }}</span></h1>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'Date', 't.date') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Date', 't.transactionDate') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'From', 't.fromCurrency') }}</th>
                 <th></th>
                 <th>{{ knp_pagination_sortable(pagination, 'To', 't.toCurrency') }}</th>

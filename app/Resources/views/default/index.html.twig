@@ -17,7 +17,7 @@
                 <div class="col-md-2">
                     {% set yourShare = lastBalance.totalEuro * app.user.percentage/100  %}
                     <div class="topbar-title">Your share</div>
-                    <div class="topbar-value {{ yourShare < lastBalance.totalEuro ? 'text-danger' : 'text-success' }}">{{ yourShare | number_format(2) }} &euro;</div>
+                    <div class="topbar-value {{ yourShare < app.user.initialFunds ? 'text-danger' : 'text-success' }}">{{ yourShare | number_format(2) }} &euro;</div>
                 </div>
                 <div class="col-md-2">
                     <div class="topbar-title">Your initial investment</div>
@@ -48,7 +48,7 @@
 
             <div class="row">
                 <div id="wallet_spread" class="col-md-8">
-                    <div id="balances_tbody" class="container-fluid"></div>
+                    <div id="balances_body" class="container-fluid"></div>
                 </div>
 
                 <div id="history" class="col-md-4">
@@ -58,8 +58,7 @@
 
             <div class="row">
                 <div class="col-md-8">
-                    <div id="participants_tbody" class="container-fluid"></div>
-
+                    <div id="participants_body" class="container-fluid"></div>
                 </div>
             </div>
         </div>

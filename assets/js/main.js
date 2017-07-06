@@ -4,40 +4,16 @@
 var $ = require('jquery');
 require('bootstrap-sass');
 
-function initHandlers(el)
-{
-  $('a.sortable, ul.pagination li a').on("click", function () {
-    $.get($(this).attr('href'), [], function (data, status, jqXHR) {
-      $(el).html(data);
-      jqXHR.always(function () {
-        initHandlers(el);
-      });
-    });
-
-    return false;
-  });
-}
-
-$(document).ready(function() {
-  $.get('/balances', [], function (data, status, jqXHR) {
-    $("#balances_tbody").html(data);
-    jqXHR.always(function () {
-      initHandlers($("#balances_tbody"));
+$(function() {
+  $(document).on('click', 'a.sortable, a.asc, a.desc, ul.pagination li a', function (e) {
+    e.preventDefault();
+    var clicked = $(this);
+    $.get(clicked.attr('href'), [], function (data, status, jqXHR) {
+      clicked.closest("div.container-fluid").html(data);
     });
   });
 
-  $.get('/participants', [], function (data, status, jqXHR) {
-    $("#participants_tbody").html(data);
-    jqXHR.always(function () {
-      initHandlers($("#participants_tbody"));
-    });
-  });
-
-  $.get('/transactions', [], function (data, status, jqXHR) {
-    $("#transactions_body").html(data);
-    jqXHR.always(function () {
-      initHandlers($("#transactions_body"));
-    });
-  });
-
+  $("#balances_body").load('/balances');
+  $("#participants_body").load('/participants');
+  $("#transactions_body").load('/transactions');
 });

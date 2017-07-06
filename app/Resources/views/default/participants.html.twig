@@ -3,7 +3,7 @@
         <h1>Participants <span class="badge"> {{ pagination.getTotalItemCount }}</span></h1>
         <table class="table table-striped">
             <thead>
-            <th>{{ knp_pagination_sortable(pagination, 'Date', 'u.date') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Date', 'u.created_at') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Name', 'u.username') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Percentage', 'u.percentage') }}</th>
             </thead>
