@@ -16,4 +16,17 @@ $(function() {
   $("#balances_body").load('/balances');
   $("#participants_body").load('/participants');
   $("#transactions_body").load('/transactions');
+
+  $("#calculator_from_value, #calculator_from_currency, #calculator_to_currency").on('change', function () {
+    $("#calculator_to_value").val(calculatePrice(
+      $("#calculator_from_currency").val(),
+      $("#calculator_from_value").val(),
+      $("#calculator_to_currency").val(),
+      prices));
+  });
 });
+
+function calculatePrice(fromCurrency, fromValue, toCurrency, pricelist)
+{
+  return fromValue * pricelist.RAW[fromCurrency][toCurrency]["PRICE"];
+}

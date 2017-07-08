@@ -4,16 +4,29 @@
     <div class="row">
         <div id="wallet_spread" class="col-md-8">
             <div id="balances_body" class="container-fluid"></div>
+            <div id="participants_body" class="container-fluid"></div>
         </div>
 
         <div id="history" class="col-md-4">
             <div id="transactions_body" class="container-fluid"></div>
-        </div>
-    </div>
+            <div id="currency_ticker">
+                <h1>Ticker</h1>
+                <script type="text/javascript">
+                  crypt_multi_num_cur = "5";
+                  crypt_base_cur_0 = "Bitcoin (BTC)";
+                  crypt_target_cur_0 = "Euro (EUR)";
+                  crypt_base_cur_1 = "Ethereum (ETH)";
+                  crypt_target_cur_1 = "Bitcoin (BTC)";
+                  crypt_base_cur_2 = "Monero (XMR)";
+                  crypt_target_cur_2 = "Bitcoin (BTC)";
+                  crypt_base_cur_3 = "Zcash (ZEC)";
+                  crypt_target_cur_3 = "Euro (EUR)";
+                  crypt_base_cur_4 = "Litecoin (LTC)";
+                  crypt_target_cur_4 = "Bitcoin (BTC)";
+                </script>
+                <script type="text/javascript" src="https://www.cryptonator.com/ui/js/widget/multi_widget.js"></script>
+            </div>
 
-    <div class="row">
-        <div class="col-md-8">
-            <div id="participants_body" class="container-fluid"></div>
         </div>
     </div>
 {% endblock body %}

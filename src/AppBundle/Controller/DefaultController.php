@@ -107,4 +107,30 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/charts", name="charts")
+     */
+    public function chartsAction()
+    {
+        $em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT b FROM AppBundle:Balance b ORDER BY b.balanceDate DESC";
+        $query = $em->createQuery($dql);
+        $lastBalance = $query->setMaxResults(1)->getResult()[0];
+
+
+        return $this->render('default/charts.html.twig', [
+            'prices' => $this->getPrices(),
+            'lastBalance' => $lastBalance,
+            'participants' => $this->getDoctrine()->getRepository(User::class)->findParticipants(),
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    private function getPrices()
+    {
+        $prices = file_get_contents('https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XMR,ZEC,LTC,EUR&tsyms=BTC,ETH,XMR,ZEC,LTC,EUR,USD');
+        return json_decode($prices, true);
+    }
 }
