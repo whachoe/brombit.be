@@ -13,9 +13,9 @@ $(function() {
     });
   });
 
-  $("#balances_body").load('/balances');
+  $("#balances_body").load('/balances?sort=b.balanceDate&direction=desc&page=1');
   $("#participants_body").load('/participants');
-  $("#transactions_body").load('/transactions');
+  $("#transactions_body").load('/transactions?sort=t.transactionDate&direction=desc&page=1');
 
   $("#calculator_from_value, #calculator_from_currency, #calculator_to_currency").on('change', function () {
     $("#calculator_to_value").val(calculatePrice(
